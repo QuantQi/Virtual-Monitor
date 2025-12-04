@@ -68,16 +68,35 @@ struct VirtualMonitorApp {
     }
     
     static func checkPermissions() async {
+        logger.info("Checking required permissions...")
+        
         // Check screen capture permission
+        logger.info("Checking Screen Recording permission...")
         let hasScreenPermission = await ScreenCaptureManager.checkPermission()
-        if !hasScreenPermission {
-            logger.warning("Screen recording permission not granted. Please enable in System Preferences > Privacy & Security > Screen Recording")
+        if hasScreenPermission {
+            logger.info("✅ Screen Recording permission: GRANTED")
+        } else {
+            logger.error("❌ Screen Recording permission: DENIED")
+            logger.warning("   Please enable in System Settings > Privacy & Security > Screen Recording")
+            logger.warning("   You may need to restart the app after granting permission")
         }
         
         // Check accessibility permission for input injection
+        logger.info("Checking Accessibility permission...")
         let hasAccessibilityPermission = InputInjector.checkPermission()
-        if !hasAccessibilityPermission {
-            logger.warning("Accessibility permission not granted. Please enable in System Preferences > Privacy & Security > Accessibility")
+        if hasAccessibilityPermission {
+            logger.info("✅ Accessibility permission: GRANTED")
+        } else {
+            logger.error("❌ Accessibility permission: DENIED")
+            logger.warning("   Please enable in System Settings > Privacy & Security > Accessibility")
+            logger.warning("   Input injection (mouse/keyboard) will not work without this permission")
+        }
+        
+        // Summary
+        if hasScreenPermission && hasAccessibilityPermission {
+            logger.info("All required permissions are granted ✅")
+        } else {
+            logger.warning("Some permissions are missing - functionality may be limited")
         }
     }
     
