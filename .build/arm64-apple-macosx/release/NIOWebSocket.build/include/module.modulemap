@@ -1,3 +1,0 @@
-module NIOWebSocket {
-    header "/Users/soc/Projects/temp/Virtual Monitor/.build/arm64-apple-macosx/release/NIOWebSocket.build/include/NIOWebSocket-Swift.h"
-}

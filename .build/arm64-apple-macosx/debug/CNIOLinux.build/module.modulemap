@@ -1,4 +1,0 @@
-module CNIOLinux {
-    umbrella header "/Users/soc/Projects/temp/Virtual Monitor/.build/checkouts/swift-nio/Sources/CNIOLinux/include/CNIOLinux.h"
-    export *
-}
