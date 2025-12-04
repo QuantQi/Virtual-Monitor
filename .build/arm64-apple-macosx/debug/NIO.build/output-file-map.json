@@ -1,0 +1,12 @@
+{
+  "": {
+    "swift-dependencies": "/Users/soc/Projects/temp/Virtual Monitor/.build/arm64-apple-macosx/debug/NIO.build/master.swiftdeps"
+  },
+  "/Users/soc/Projects/temp/Virtual Monitor/.build/checkouts/swift-nio/Sources/NIO/Exports.swift": {
+    "dependencies": "/Users/soc/Projects/temp/Virtual Monitor/.build/arm64-apple-macosx/debug/NIO.build/Exports.d",
+    "object": "/Users/soc/Projects/temp/Virtual Monitor/.build/arm64-apple-macosx/debug/NIO.build/Exports.swift.o",
+    "swiftmodule": "/Users/soc/Projects/temp/Virtual Monitor/.build/arm64-apple-macosx/debug/NIO.build/Exports~partial.swiftmodule",
+    "swift-dependencies": "/Users/soc/Projects/temp/Virtual Monitor/.build/arm64-apple-macosx/debug/NIO.build/Exports.swiftdeps",
+    "diagnostics": "/Users/soc/Projects/temp/Virtual Monitor/.build/arm64-apple-macosx/debug/NIO.build/Exports.dia"
+  }
+}

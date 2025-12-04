@@ -1,0 +1,3 @@
+module ServiceLifecycle {
+    header "/Users/soc/Projects/temp/Virtual Monitor/.build/arm64-apple-macosx/release/ServiceLifecycle.build/include/ServiceLifecycle-Swift.h"
+}

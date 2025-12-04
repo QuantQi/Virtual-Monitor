@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Virtual Monitor</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div id="app">
+        <!-- Connection status bar -->
+        <div id="status-bar">
+            <div id="status-indicator" class="disconnected"></div>
+            <span id="status-text">Connecting...</span>
+            <div id="stats">
+                <span id="resolution">--</span>
+                <span id="fps">-- fps</span>
+                <span id="latency">-- ms</span>
+            </div>
+            <div id="controls">
+                <button id="fullscreen-btn" title="Fullscreen">⛶</button>
+                <button id="control-toggle" title="Toggle Control">🖱️</button>
+            </div>
+        </div>
+        
+        <!-- Video container -->
+        <div id="video-container">
+            <video id="remote-video" autoplay playsinline muted></video>
+            
+            <!-- Input capture overlay -->
+            <div id="input-overlay"></div>
+            
+            <!-- Connection overlay -->
+            <div id="connection-overlay">
+                <div class="spinner"></div>
+                <p id="connection-message">Connecting to Virtual Monitor...</p>
+            </div>
+        </div>
+    </div>
+    
+    <script src="client.js"></script>
+</body>
+</html>

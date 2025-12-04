@@ -1,0 +1,3 @@
+module UnixSignals {
+    header "/Users/soc/Projects/temp/Virtual Monitor/.build/arm64-apple-macosx/release/UnixSignals.build/include/UnixSignals-Swift.h"
+}

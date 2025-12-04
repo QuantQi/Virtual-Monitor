@@ -1,0 +1,25 @@
+{
+  "": {
+    "dependencies": "/Users/soc/Projects/temp/Virtual Monitor/.build/arm64-apple-macosx/release/NIOHTTPTypesHTTP1.build/NIOHTTPTypesHTTP1.d",
+    "object": "/Users/soc/Projects/temp/Virtual Monitor/.build/arm64-apple-macosx/release/NIOHTTPTypesHTTP1.build/NIOHTTPTypesHTTP1.o",
+    "swift-dependencies": "/Users/soc/Projects/temp/Virtual Monitor/.build/arm64-apple-macosx/release/NIOHTTPTypesHTTP1.build/master.swiftdeps"
+  },
+  "/Users/soc/Projects/temp/Virtual Monitor/.build/checkouts/swift-nio-extras/Sources/NIOHTTPTypesHTTP1/HTTP1ToHTTPCodec.swift": {
+    "object": "/Users/soc/Projects/temp/Virtual Monitor/.build/arm64-apple-macosx/release/NIOHTTPTypesHTTP1.build/HTTP1ToHTTPCodec.swift.o",
+    "swiftmodule": "/Users/soc/Projects/temp/Virtual Monitor/.build/arm64-apple-macosx/release/NIOHTTPTypesHTTP1.build/HTTP1ToHTTPCodec~partial.swiftmodule",
+    "swift-dependencies": "/Users/soc/Projects/temp/Virtual Monitor/.build/arm64-apple-macosx/release/NIOHTTPTypesHTTP1.build/HTTP1ToHTTPCodec.swiftdeps",
+    "diagnostics": "/Users/soc/Projects/temp/Virtual Monitor/.build/arm64-apple-macosx/release/NIOHTTPTypesHTTP1.build/HTTP1ToHTTPCodec.dia"
+  },
+  "/Users/soc/Projects/temp/Virtual Monitor/.build/checkouts/swift-nio-extras/Sources/NIOHTTPTypesHTTP1/HTTPToHTTP1Codec.swift": {
+    "object": "/Users/soc/Projects/temp/Virtual Monitor/.build/arm64-apple-macosx/release/NIOHTTPTypesHTTP1.build/HTTPToHTTP1Codec.swift.o",
+    "swiftmodule": "/Users/soc/Projects/temp/Virtual Monitor/.build/arm64-apple-macosx/release/NIOHTTPTypesHTTP1.build/HTTPToHTTP1Codec~partial.swiftmodule",
+    "swift-dependencies": "/Users/soc/Projects/temp/Virtual Monitor/.build/arm64-apple-macosx/release/NIOHTTPTypesHTTP1.build/HTTPToHTTP1Codec.swiftdeps",
+    "diagnostics": "/Users/soc/Projects/temp/Virtual Monitor/.build/arm64-apple-macosx/release/NIOHTTPTypesHTTP1.build/HTTPToHTTP1Codec.dia"
+  },
+  "/Users/soc/Projects/temp/Virtual Monitor/.build/checkouts/swift-nio-extras/Sources/NIOHTTPTypesHTTP1/HTTPTypeConversion.swift": {
+    "object": "/Users/soc/Projects/temp/Virtual Monitor/.build/arm64-apple-macosx/release/NIOHTTPTypesHTTP1.build/HTTPTypeConversion.swift.o",
+    "swiftmodule": "/Users/soc/Projects/temp/Virtual Monitor/.build/arm64-apple-macosx/release/NIOHTTPTypesHTTP1.build/HTTPTypeConversion~partial.swiftmodule",
+    "swift-dependencies": "/Users/soc/Projects/temp/Virtual Monitor/.build/arm64-apple-macosx/release/NIOHTTPTypesHTTP1.build/HTTPTypeConversion.swiftdeps",
+    "diagnostics": "/Users/soc/Projects/temp/Virtual Monitor/.build/arm64-apple-macosx/release/NIOHTTPTypesHTTP1.build/HTTPTypeConversion.dia"
+  }
+}

@@ -1,0 +1,37 @@
+{
+  "": {
+    "dependencies": "/Users/soc/Projects/temp/Virtual Monitor/.build/arm64-apple-macosx/release/NIOConcurrencyHelpers.build/NIOConcurrencyHelpers.d",
+    "object": "/Users/soc/Projects/temp/Virtual Monitor/.build/arm64-apple-macosx/release/NIOConcurrencyHelpers.build/NIOConcurrencyHelpers.o",
+    "swift-dependencies": "/Users/soc/Projects/temp/Virtual Monitor/.build/arm64-apple-macosx/release/NIOConcurrencyHelpers.build/master.swiftdeps"
+  },
+  "/Users/soc/Projects/temp/Virtual Monitor/.build/checkouts/swift-nio/Sources/NIOConcurrencyHelpers/NIOAtomic.swift": {
+    "object": "/Users/soc/Projects/temp/Virtual Monitor/.build/arm64-apple-macosx/release/NIOConcurrencyHelpers.build/NIOAtomic.swift.o",
+    "swiftmodule": "/Users/soc/Projects/temp/Virtual Monitor/.build/arm64-apple-macosx/release/NIOConcurrencyHelpers.build/NIOAtomic~partial.swiftmodule",
+    "swift-dependencies": "/Users/soc/Projects/temp/Virtual Monitor/.build/arm64-apple-macosx/release/NIOConcurrencyHelpers.build/NIOAtomic.swiftdeps",
+    "diagnostics": "/Users/soc/Projects/temp/Virtual Monitor/.build/arm64-apple-macosx/release/NIOConcurrencyHelpers.build/NIOAtomic.dia"
+  },
+  "/Users/soc/Projects/temp/Virtual Monitor/.build/checkouts/swift-nio/Sources/NIOConcurrencyHelpers/NIOLock.swift": {
+    "object": "/Users/soc/Projects/temp/Virtual Monitor/.build/arm64-apple-macosx/release/NIOConcurrencyHelpers.build/NIOLock.swift.o",
+    "swiftmodule": "/Users/soc/Projects/temp/Virtual Monitor/.build/arm64-apple-macosx/release/NIOConcurrencyHelpers.build/NIOLock~partial.swiftmodule",
+    "swift-dependencies": "/Users/soc/Projects/temp/Virtual Monitor/.build/arm64-apple-macosx/release/NIOConcurrencyHelpers.build/NIOLock.swiftdeps",
+    "diagnostics": "/Users/soc/Projects/temp/Virtual Monitor/.build/arm64-apple-macosx/release/NIOConcurrencyHelpers.build/NIOLock.dia"
+  },
+  "/Users/soc/Projects/temp/Virtual Monitor/.build/checkouts/swift-nio/Sources/NIOConcurrencyHelpers/NIOLockedValueBox.swift": {
+    "object": "/Users/soc/Projects/temp/Virtual Monitor/.build/arm64-apple-macosx/release/NIOConcurrencyHelpers.build/NIOLockedValueBox.swift.o",
+    "swiftmodule": "/Users/soc/Projects/temp/Virtual Monitor/.build/arm64-apple-macosx/release/NIOConcurrencyHelpers.build/NIOLockedValueBox~partial.swiftmodule",
+    "swift-dependencies": "/Users/soc/Projects/temp/Virtual Monitor/.build/arm64-apple-macosx/release/NIOConcurrencyHelpers.build/NIOLockedValueBox.swiftdeps",
+    "diagnostics": "/Users/soc/Projects/temp/Virtual Monitor/.build/arm64-apple-macosx/release/NIOConcurrencyHelpers.build/NIOLockedValueBox.dia"
+  },
+  "/Users/soc/Projects/temp/Virtual Monitor/.build/checkouts/swift-nio/Sources/NIOConcurrencyHelpers/atomics.swift": {
+    "object": "/Users/soc/Projects/temp/Virtual Monitor/.build/arm64-apple-macosx/release/NIOConcurrencyHelpers.build/atomics.swift.o",
+    "swiftmodule": "/Users/soc/Projects/temp/Virtual Monitor/.build/arm64-apple-macosx/release/NIOConcurrencyHelpers.build/atomics~partial.swiftmodule",
+    "swift-dependencies": "/Users/soc/Projects/temp/Virtual Monitor/.build/arm64-apple-macosx/release/NIOConcurrencyHelpers.build/atomics.swiftdeps",
+    "diagnostics": "/Users/soc/Projects/temp/Virtual Monitor/.build/arm64-apple-macosx/release/NIOConcurrencyHelpers.build/atomics.dia"
+  },
+  "/Users/soc/Projects/temp/Virtual Monitor/.build/checkouts/swift-nio/Sources/NIOConcurrencyHelpers/lock.swift": {
+    "object": "/Users/soc/Projects/temp/Virtual Monitor/.build/arm64-apple-macosx/release/NIOConcurrencyHelpers.build/lock.swift.o",
+    "swiftmodule": "/Users/soc/Projects/temp/Virtual Monitor/.build/arm64-apple-macosx/release/NIOConcurrencyHelpers.build/lock~partial.swiftmodule",
+    "swift-dependencies": "/Users/soc/Projects/temp/Virtual Monitor/.build/arm64-apple-macosx/release/NIOConcurrencyHelpers.build/lock.swiftdeps",
+    "diagnostics": "/Users/soc/Projects/temp/Virtual Monitor/.build/arm64-apple-macosx/release/NIOConcurrencyHelpers.build/lock.dia"
+  }
+}

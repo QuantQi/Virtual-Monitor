@@ -1,0 +1,4 @@
+module CNIOPosix {
+    umbrella header "/Users/soc/Projects/temp/Virtual Monitor/.build/checkouts/swift-nio/Sources/CNIOPosix/include/CNIOPosix.h"
+    export *
+}

@@ -1,0 +1,125 @@
+import Foundation
+import Logging
+
+// Configure logging
+LoggingSystem.bootstrap { label in
+    var handler = StreamLogHandler.standardOutput(label: label)
+    handler.logLevel = .debug
+    return handler
+}
+
+let logger = Logger(label: "com.virtualmonitor.main")
+
+// Main application
+struct VirtualMonitorApp {
+    static func run() async throws {
+        logger.info("Virtual Monitor starting...")
+        
+        // Configuration
+        let config = AppConfiguration.shared
+        logger.info("Server will listen on port \(config.serverPort)")
+        logger.info("Stream resolution: \(config.streamWidth)x\(config.streamHeight)@\(config.targetFPS)fps")
+        
+        // Check permissions
+        await checkPermissions()
+        
+        // Initialize components
+        let sessionManager = SessionManager.shared
+        let captureManager = ScreenCaptureManager.shared
+        let encoder = H264Encoder.shared
+        let webRTCManager = WebRTCManager.shared
+        let inputInjector = InputInjector.shared
+        
+        // Wire up the pipeline
+        // Option 1: Send raw frames to WebRTC (let WebRTC handle encoding)
+        captureManager.frameHandler = { sampleBuffer in
+            webRTCManager.sendFrame(sampleBuffer)
+        }
+        
+        // Option 2: Use our own H.264 encoder (for future custom encoding)
+        // captureManager.frameHandler = { sampleBuffer in
+        //     encoder.encode(sampleBuffer: sampleBuffer)
+        // }
+        // encoder.encodedFrameHandler = { encodedFrame in
+        //     webRTCManager.sendEncodedFrame(encodedFrame)
+        // }
+        
+        // Initialize encoder (for future use with custom encoding path)
+        do {
+            try encoder.initialize()
+        } catch {
+            logger.warning("Failed to initialize H.264 encoder: \(error)")
+        }
+        
+        // Start the server
+        let server = try await BrowserRelayServer(
+            host: "0.0.0.0",
+            port: config.serverPort,
+            sessionManager: sessionManager,
+            webRTCManager: webRTCManager,
+            inputInjector: inputInjector
+        )
+        
+        logger.info("Server started successfully")
+        logger.info("Access the client at: http://\(getLocalIPAddress() ?? "localhost"):\(config.serverPort)/")
+        
+        // Keep the application running
+        try await server.run()
+    }
+    
+    static func checkPermissions() async {
+        // Check screen capture permission
+        let hasScreenPermission = await ScreenCaptureManager.checkPermission()
+        if !hasScreenPermission {
+            logger.warning("Screen recording permission not granted. Please enable in System Preferences > Privacy & Security > Screen Recording")
+        }
+        
+        // Check accessibility permission for input injection
+        let hasAccessibilityPermission = InputInjector.checkPermission()
+        if !hasAccessibilityPermission {
+            logger.warning("Accessibility permission not granted. Please enable in System Preferences > Privacy & Security > Accessibility")
+        }
+    }
+    
+    static func getLocalIPAddress() -> String? {
+        var address: String?
+        var ifaddr: UnsafeMutablePointer<ifaddrs>?
+        
+        guard getifaddrs(&ifaddr) == 0 else { return nil }
+        defer { freeifaddrs(ifaddr) }
+        
+        var ptr = ifaddr
+        while ptr != nil {
+            defer { ptr = ptr?.pointee.ifa_next }
+            
+            guard let interface = ptr?.pointee else { continue }
+            let addrFamily = interface.ifa_addr.pointee.sa_family
+            
+            if addrFamily == UInt8(AF_INET) {
+                let name = String(cString: interface.ifa_name)
+                if name == "en0" || name == "en1" {
+                    var hostname = [CChar](repeating: 0, count: Int(NI_MAXHOST))
+                    getnameinfo(interface.ifa_addr, socklen_t(interface.ifa_addr.pointee.sa_len),
+                               &hostname, socklen_t(hostname.count),
+                               nil, 0, NI_NUMERICHOST)
+                    address = String(cString: hostname)
+                    break
+                }
+            }
+        }
+        return address
+    }
+}
+
+// Entry point
+Task {
+    do {
+        try await VirtualMonitorApp.run()
+    } catch {
+        print("Fatal error: \(error)")
+        exit(1)
+    }
+}
+
+// Keep the main thread alive
+RunLoop.main.run()

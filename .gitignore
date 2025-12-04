@@ -1,0 +1,46 @@
+# Swift & macOS
+.build/
+Packages/
+DerivedData/
+*.xcodeproj/
+*.xcworkspace/
+*.xcuserstate
+*.xcuserdata/
+*.DS_Store
+*.swp
+*.swo
+*.lock
+# User-specific
+.idea/
+.vscode/
+# Logs
+*.log
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+# Thumbnails
+._*
+# Files that might appear in the root of a volume
+.DocumentRevisions-V100
+.fseventsd
+.Spotlight-V100
+.TemporaryItems
+.Trashes
+.VolumeIcon.icns
+.com.apple.timemachine.donotpresent
+# SwiftPM
+.swiftpm/xcode/package.xcworkspace/
+.swiftpm/xcode/xcshareddata/
+.swiftpm/xcode/xcuserdata/
+# Playgrounds
+timeline.xctimeline
+playground.xcworkspace
+# SwiftPM build folder
+/.build
+# SPM Packages
+/Packages
+# Xcode Patch
+*.xcodeproj/project.xcworkspace/xcuserdata
+*.xcodeproj/xcuserdata
+*.xcodeproj/project.xcworkspace/xcshareddata/WorkspaceSettings.xcsettings

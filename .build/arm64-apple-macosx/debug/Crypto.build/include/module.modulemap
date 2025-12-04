@@ -1,0 +1,3 @@
+module Crypto {
+    header "/Users/soc/Projects/temp/Virtual Monitor/.build/arm64-apple-macosx/debug/Crypto.build/include/Crypto-Swift.h"
+}

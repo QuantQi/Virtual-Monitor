@@ -1,0 +1,3 @@
+module Logging {
+    header "/Users/soc/Projects/temp/Virtual Monitor/.build/arm64-apple-macosx/release/Logging.build/include/Logging-Swift.h"
+}

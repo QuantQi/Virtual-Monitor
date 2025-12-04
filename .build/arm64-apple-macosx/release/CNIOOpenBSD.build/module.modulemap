@@ -1,0 +1,4 @@
+module CNIOOpenBSD {
+    umbrella header "/Users/soc/Projects/temp/Virtual Monitor/.build/checkouts/swift-nio/Sources/CNIOOpenBSD/include/CNIOOpenBSD.h"
+    export *
+}

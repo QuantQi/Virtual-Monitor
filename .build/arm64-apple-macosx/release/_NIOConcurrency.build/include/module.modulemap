@@ -1,0 +1,3 @@
+module _NIOConcurrency {
+    header "/Users/soc/Projects/temp/Virtual Monitor/.build/arm64-apple-macosx/release/_NIOConcurrency.build/include/_NIOConcurrency-Swift.h"
+}

@@ -1,0 +1,89 @@
+{
+  "": {
+    "swift-dependencies": "/Users/soc/Projects/temp/Virtual Monitor/.build/arm64-apple-macosx/debug/VirtualMonitor.build/master.swiftdeps"
+  },
+  "/Users/soc/Projects/temp/Virtual Monitor/Sources/VirtualMonitor/Capture/ScreenCaptureManager.swift": {
+    "dependencies": "/Users/soc/Projects/temp/Virtual Monitor/.build/arm64-apple-macosx/debug/VirtualMonitor.build/ScreenCaptureManager.d",
+    "object": "/Users/soc/Projects/temp/Virtual Monitor/.build/arm64-apple-macosx/debug/VirtualMonitor.build/ScreenCaptureManager.swift.o",
+    "swiftmodule": "/Users/soc/Projects/temp/Virtual Monitor/.build/arm64-apple-macosx/debug/VirtualMonitor.build/ScreenCaptureManager~partial.swiftmodule",
+    "swift-dependencies": "/Users/soc/Projects/temp/Virtual Monitor/.build/arm64-apple-macosx/debug/VirtualMonitor.build/ScreenCaptureManager.swiftdeps",
+    "diagnostics": "/Users/soc/Projects/temp/Virtual Monitor/.build/arm64-apple-macosx/debug/VirtualMonitor.build/ScreenCaptureManager.dia"
+  },
+  "/Users/soc/Projects/temp/Virtual Monitor/Sources/VirtualMonitor/Configuration/AppConfiguration.swift": {
+    "dependencies": "/Users/soc/Projects/temp/Virtual Monitor/.build/arm64-apple-macosx/debug/VirtualMonitor.build/AppConfiguration.d",
+    "object": "/Users/soc/Projects/temp/Virtual Monitor/.build/arm64-apple-macosx/debug/VirtualMonitor.build/AppConfiguration.swift.o",
+    "swiftmodule": "/Users/soc/Projects/temp/Virtual Monitor/.build/arm64-apple-macosx/debug/VirtualMonitor.build/AppConfiguration~partial.swiftmodule",
+    "swift-dependencies": "/Users/soc/Projects/temp/Virtual Monitor/.build/arm64-apple-macosx/debug/VirtualMonitor.build/AppConfiguration.swiftdeps",
+    "diagnostics": "/Users/soc/Projects/temp/Virtual Monitor/.build/arm64-apple-macosx/debug/VirtualMonitor.build/AppConfiguration.dia"
+  },
+  "/Users/soc/Projects/temp/Virtual Monitor/Sources/VirtualMonitor/Encoder/H264Encoder.swift": {
+    "dependencies": "/Users/soc/Projects/temp/Virtual Monitor/.build/arm64-apple-macosx/debug/VirtualMonitor.build/H264Encoder.d",
+    "object": "/Users/soc/Projects/temp/Virtual Monitor/.build/arm64-apple-macosx/debug/VirtualMonitor.build/H264Encoder.swift.o",
+    "swiftmodule": "/Users/soc/Projects/temp/Virtual Monitor/.build/arm64-apple-macosx/debug/VirtualMonitor.build/H264Encoder~partial.swiftmodule",
+    "swift-dependencies": "/Users/soc/Projects/temp/Virtual Monitor/.build/arm64-apple-macosx/debug/VirtualMonitor.build/H264Encoder.swiftdeps",
+    "diagnostics": "/Users/soc/Projects/temp/Virtual Monitor/.build/arm64-apple-macosx/debug/VirtualMonitor.build/H264Encoder.dia"
+  },
+  "/Users/soc/Projects/temp/Virtual Monitor/Sources/VirtualMonitor/Input/InputInjector.swift": {
+    "dependencies": "/Users/soc/Projects/temp/Virtual Monitor/.build/arm64-apple-macosx/debug/VirtualMonitor.build/InputInjector.d",
+    "object": "/Users/soc/Projects/temp/Virtual Monitor/.build/arm64-apple-macosx/debug/VirtualMonitor.build/InputInjector.swift.o",
+    "swiftmodule": "/Users/soc/Projects/temp/Virtual Monitor/.build/arm64-apple-macosx/debug/VirtualMonitor.build/InputInjector~partial.swiftmodule",
+    "swift-dependencies": "/Users/soc/Projects/temp/Virtual Monitor/.build/arm64-apple-macosx/debug/VirtualMonitor.build/InputInjector.swiftdeps",
+    "diagnostics": "/Users/soc/Projects/temp/Virtual Monitor/.build/arm64-apple-macosx/debug/VirtualMonitor.build/InputInjector.dia"
+  },
+  "/Users/soc/Projects/temp/Virtual Monitor/Sources/VirtualMonitor/Models/Messages.swift": {
+    "dependencies": "/Users/soc/Projects/temp/Virtual Monitor/.build/arm64-apple-macosx/debug/VirtualMonitor.build/Messages.d",
+    "object": "/Users/soc/Projects/temp/Virtual Monitor/.build/arm64-apple-macosx/debug/VirtualMonitor.build/Messages.swift.o",
+    "swiftmodule": "/Users/soc/Projects/temp/Virtual Monitor/.build/arm64-apple-macosx/debug/VirtualMonitor.build/Messages~partial.swiftmodule",
+    "swift-dependencies": "/Users/soc/Projects/temp/Virtual Monitor/.build/arm64-apple-macosx/debug/VirtualMonitor.build/Messages.swiftdeps",
+    "diagnostics": "/Users/soc/Projects/temp/Virtual Monitor/.build/arm64-apple-macosx/debug/VirtualMonitor.build/Messages.dia"
+  },
+  "/Users/soc/Projects/temp/Virtual Monitor/Sources/VirtualMonitor/Server/BrowserRelayServer.swift": {
+    "dependencies": "/Users/soc/Projects/temp/Virtual Monitor/.build/arm64-apple-macosx/debug/VirtualMonitor.build/BrowserRelayServer.d",
+    "object": "/Users/soc/Projects/temp/Virtual Monitor/.build/arm64-apple-macosx/debug/VirtualMonitor.build/BrowserRelayServer.swift.o",
+    "swiftmodule": "/Users/soc/Projects/temp/Virtual Monitor/.build/arm64-apple-macosx/debug/VirtualMonitor.build/BrowserRelayServer~partial.swiftmodule",
+    "swift-dependencies": "/Users/soc/Projects/temp/Virtual Monitor/.build/arm64-apple-macosx/debug/VirtualMonitor.build/BrowserRelayServer.swiftdeps",
+    "diagnostics": "/Users/soc/Projects/temp/Virtual Monitor/.build/arm64-apple-macosx/debug/VirtualMonitor.build/BrowserRelayServer.dia"
+  },
+  "/Users/soc/Projects/temp/Virtual Monitor/Sources/VirtualMonitor/Server/WebSocketHandler.swift": {
+    "dependencies": "/Users/soc/Projects/temp/Virtual Monitor/.build/arm64-apple-macosx/debug/VirtualMonitor.build/WebSocketHandler.d",
+    "object": "/Users/soc/Projects/temp/Virtual Monitor/.build/arm64-apple-macosx/debug/VirtualMonitor.build/WebSocketHandler.swift.o",
+    "swiftmodule": "/Users/soc/Projects/temp/Virtual Monitor/.build/arm64-apple-macosx/debug/VirtualMonitor.build/WebSocketHandler~partial.swiftmodule",
+    "swift-dependencies": "/Users/soc/Projects/temp/Virtual Monitor/.build/arm64-apple-macosx/debug/VirtualMonitor.build/WebSocketHandler.swiftdeps",
+    "diagnostics": "/Users/soc/Projects/temp/Virtual Monitor/.build/arm64-apple-macosx/debug/VirtualMonitor.build/WebSocketHandler.dia"
+  },
+  "/Users/soc/Projects/temp/Virtual Monitor/Sources/VirtualMonitor/Session/SessionManager.swift": {
+    "dependencies": "/Users/soc/Projects/temp/Virtual Monitor/.build/arm64-apple-macosx/debug/VirtualMonitor.build/SessionManager.d",
+    "object": "/Users/soc/Projects/temp/Virtual Monitor/.build/arm64-apple-macosx/debug/VirtualMonitor.build/SessionManager.swift.o",
+    "swiftmodule": "/Users/soc/Projects/temp/Virtual Monitor/.build/arm64-apple-macosx/debug/VirtualMonitor.build/SessionManager~partial.swiftmodule",
+    "swift-dependencies": "/Users/soc/Projects/temp/Virtual Monitor/.build/arm64-apple-macosx/debug/VirtualMonitor.build/SessionManager.swiftdeps",
+    "diagnostics": "/Users/soc/Projects/temp/Virtual Monitor/.build/arm64-apple-macosx/debug/VirtualMonitor.build/SessionManager.dia"
+  },
+  "/Users/soc/Projects/temp/Virtual Monitor/Sources/VirtualMonitor/WebRTC/ScreenVideoCapturer.swift": {
+    "dependencies": "/Users/soc/Projects/temp/Virtual Monitor/.build/arm64-apple-macosx/debug/VirtualMonitor.build/ScreenVideoCapturer.d",
+    "object": "/Users/soc/Projects/temp/Virtual Monitor/.build/arm64-apple-macosx/debug/VirtualMonitor.build/ScreenVideoCapturer.swift.o",
+    "swiftmodule": "/Users/soc/Projects/temp/Virtual Monitor/.build/arm64-apple-macosx/debug/VirtualMonitor.build/ScreenVideoCapturer~partial.swiftmodule",
+    "swift-dependencies": "/Users/soc/Projects/temp/Virtual Monitor/.build/arm64-apple-macosx/debug/VirtualMonitor.build/ScreenVideoCapturer.swiftdeps",
+    "diagnostics": "/Users/soc/Projects/temp/Virtual Monitor/.build/arm64-apple-macosx/debug/VirtualMonitor.build/ScreenVideoCapturer.dia"
+  },
+  "/Users/soc/Projects/temp/Virtual Monitor/Sources/VirtualMonitor/WebRTC/WebRTCManager.swift": {
+    "dependencies": "/Users/soc/Projects/temp/Virtual Monitor/.build/arm64-apple-macosx/debug/VirtualMonitor.build/WebRTCManager.d",
+    "object": "/Users/soc/Projects/temp/Virtual Monitor/.build/arm64-apple-macosx/debug/VirtualMonitor.build/WebRTCManager.swift.o",
+    "swiftmodule": "/Users/soc/Projects/temp/Virtual Monitor/.build/arm64-apple-macosx/debug/VirtualMonitor.build/WebRTCManager~partial.swiftmodule",
+    "swift-dependencies": "/Users/soc/Projects/temp/Virtual Monitor/.build/arm64-apple-macosx/debug/VirtualMonitor.build/WebRTCManager.swiftdeps",
+    "diagnostics": "/Users/soc/Projects/temp/Virtual Monitor/.build/arm64-apple-macosx/debug/VirtualMonitor.build/WebRTCManager.dia"
+  },
+  "/Users/soc/Projects/temp/Virtual Monitor/Sources/VirtualMonitor/main.swift": {
+    "dependencies": "/Users/soc/Projects/temp/Virtual Monitor/.build/arm64-apple-macosx/debug/VirtualMonitor.build/main.d",
+    "object": "/Users/soc/Projects/temp/Virtual Monitor/.build/arm64-apple-macosx/debug/VirtualMonitor.build/main.swift.o",
+    "swiftmodule": "/Users/soc/Projects/temp/Virtual Monitor/.build/arm64-apple-macosx/debug/VirtualMonitor.build/main~partial.swiftmodule",
+    "swift-dependencies": "/Users/soc/Projects/temp/Virtual Monitor/.build/arm64-apple-macosx/debug/VirtualMonitor.build/main.swiftdeps",
+    "diagnostics": "/Users/soc/Projects/temp/Virtual Monitor/.build/arm64-apple-macosx/debug/VirtualMonitor.build/main.dia"
+  },
+  "/Users/soc/Projects/temp/Virtual Monitor/.build/arm64-apple-macosx/debug/VirtualMonitor.build/DerivedSources/resource_bundle_accessor.swift": {
+    "dependencies": "/Users/soc/Projects/temp/Virtual Monitor/.build/arm64-apple-macosx/debug/VirtualMonitor.build/resource_bundle_accessor.d",
+    "object": "/Users/soc/Projects/temp/Virtual Monitor/.build/arm64-apple-macosx/debug/VirtualMonitor.build/resource_bundle_accessor.swift.o",
+    "swiftmodule": "/Users/soc/Projects/temp/Virtual Monitor/.build/arm64-apple-macosx/debug/VirtualMonitor.build/resource_bundle_accessor~partial.swiftmodule",
+    "swift-dependencies": "/Users/soc/Projects/temp/Virtual Monitor/.build/arm64-apple-macosx/debug/VirtualMonitor.build/resource_bundle_accessor.swiftdeps",
+    "diagnostics": "/Users/soc/Projects/temp/Virtual Monitor/.build/arm64-apple-macosx/debug/VirtualMonitor.build/resource_bundle_accessor.dia"
+  }
+}

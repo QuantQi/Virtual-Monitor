@@ -1,0 +1,19 @@
+{
+  "": {
+    "dependencies": "/Users/soc/Projects/temp/Virtual Monitor/.build/arm64-apple-macosx/release/ConcurrencyHelpers.build/ConcurrencyHelpers.d",
+    "object": "/Users/soc/Projects/temp/Virtual Monitor/.build/arm64-apple-macosx/release/ConcurrencyHelpers.build/ConcurrencyHelpers.o",
+    "swift-dependencies": "/Users/soc/Projects/temp/Virtual Monitor/.build/arm64-apple-macosx/release/ConcurrencyHelpers.build/master.swiftdeps"
+  },
+  "/Users/soc/Projects/temp/Virtual Monitor/.build/checkouts/swift-service-lifecycle/Sources/ConcurrencyHelpers/Lock.swift": {
+    "object": "/Users/soc/Projects/temp/Virtual Monitor/.build/arm64-apple-macosx/release/ConcurrencyHelpers.build/Lock.swift.o",
+    "swiftmodule": "/Users/soc/Projects/temp/Virtual Monitor/.build/arm64-apple-macosx/release/ConcurrencyHelpers.build/Lock~partial.swiftmodule",
+    "swift-dependencies": "/Users/soc/Projects/temp/Virtual Monitor/.build/arm64-apple-macosx/release/ConcurrencyHelpers.build/Lock.swiftdeps",
+    "diagnostics": "/Users/soc/Projects/temp/Virtual Monitor/.build/arm64-apple-macosx/release/ConcurrencyHelpers.build/Lock.dia"
+  },
+  "/Users/soc/Projects/temp/Virtual Monitor/.build/checkouts/swift-service-lifecycle/Sources/ConcurrencyHelpers/LockedValueBox.swift": {
+    "object": "/Users/soc/Projects/temp/Virtual Monitor/.build/arm64-apple-macosx/release/ConcurrencyHelpers.build/LockedValueBox.swift.o",
+    "swiftmodule": "/Users/soc/Projects/temp/Virtual Monitor/.build/arm64-apple-macosx/release/ConcurrencyHelpers.build/LockedValueBox~partial.swiftmodule",
+    "swift-dependencies": "/Users/soc/Projects/temp/Virtual Monitor/.build/arm64-apple-macosx/release/ConcurrencyHelpers.build/LockedValueBox.swiftdeps",
+    "diagnostics": "/Users/soc/Projects/temp/Virtual Monitor/.build/arm64-apple-macosx/release/ConcurrencyHelpers.build/LockedValueBox.dia"
+  }
+}

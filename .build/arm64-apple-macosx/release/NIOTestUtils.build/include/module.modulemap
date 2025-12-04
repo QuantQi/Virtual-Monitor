@@ -1,0 +1,3 @@
+module NIOTestUtils {
+    header "/Users/soc/Projects/temp/Virtual Monitor/.build/arm64-apple-macosx/release/NIOTestUtils.build/include/NIOTestUtils-Swift.h"
+}

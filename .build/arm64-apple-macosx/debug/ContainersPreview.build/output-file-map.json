@@ -1,0 +1,61 @@
+{
+  "": {
+    "swift-dependencies": "/Users/soc/Projects/temp/Virtual Monitor/.build/arm64-apple-macosx/debug/ContainersPreview.build/master.swiftdeps"
+  },
+  "/Users/soc/Projects/temp/Virtual Monitor/.build/checkouts/swift-collections/Sources/ContainersPreview/BorrowIteratorProtocol.swift": {
+    "dependencies": "/Users/soc/Projects/temp/Virtual Monitor/.build/arm64-apple-macosx/debug/ContainersPreview.build/BorrowIteratorProtocol.d",
+    "object": "/Users/soc/Projects/temp/Virtual Monitor/.build/arm64-apple-macosx/debug/ContainersPreview.build/BorrowIteratorProtocol.swift.o",
+    "swiftmodule": "/Users/soc/Projects/temp/Virtual Monitor/.build/arm64-apple-macosx/debug/ContainersPreview.build/BorrowIteratorProtocol~partial.swiftmodule",
+    "swift-dependencies": "/Users/soc/Projects/temp/Virtual Monitor/.build/arm64-apple-macosx/debug/ContainersPreview.build/BorrowIteratorProtocol.swiftdeps",
+    "diagnostics": "/Users/soc/Projects/temp/Virtual Monitor/.build/arm64-apple-macosx/debug/ContainersPreview.build/BorrowIteratorProtocol.dia"
+  },
+  "/Users/soc/Projects/temp/Virtual Monitor/.build/checkouts/swift-collections/Sources/ContainersPreview/Box.swift": {
+    "dependencies": "/Users/soc/Projects/temp/Virtual Monitor/.build/arm64-apple-macosx/debug/ContainersPreview.build/Box.d",
+    "object": "/Users/soc/Projects/temp/Virtual Monitor/.build/arm64-apple-macosx/debug/ContainersPreview.build/Box.swift.o",
+    "swiftmodule": "/Users/soc/Projects/temp/Virtual Monitor/.build/arm64-apple-macosx/debug/ContainersPreview.build/Box~partial.swiftmodule",
+    "swift-dependencies": "/Users/soc/Projects/temp/Virtual Monitor/.build/arm64-apple-macosx/debug/ContainersPreview.build/Box.swiftdeps",
+    "diagnostics": "/Users/soc/Projects/temp/Virtual Monitor/.build/arm64-apple-macosx/debug/ContainersPreview.build/Box.dia"
+  },
+  "/Users/soc/Projects/temp/Virtual Monitor/.build/checkouts/swift-collections/Sources/ContainersPreview/Container+Utilities.swift": {
+    "dependencies": "/Users/soc/Projects/temp/Virtual Monitor/.build/arm64-apple-macosx/debug/ContainersPreview.build/Container+Utilities.d",
+    "object": "/Users/soc/Projects/temp/Virtual Monitor/.build/arm64-apple-macosx/debug/ContainersPreview.build/Container+Utilities.swift.o",
+    "swiftmodule": "/Users/soc/Projects/temp/Virtual Monitor/.build/arm64-apple-macosx/debug/ContainersPreview.build/Container+Utilities~partial.swiftmodule",
+    "swift-dependencies": "/Users/soc/Projects/temp/Virtual Monitor/.build/arm64-apple-macosx/debug/ContainersPreview.build/Container+Utilities.swiftdeps",
+    "diagnostics": "/Users/soc/Projects/temp/Virtual Monitor/.build/arm64-apple-macosx/debug/ContainersPreview.build/Container+Utilities.dia"
+  },
+  "/Users/soc/Projects/temp/Virtual Monitor/.build/checkouts/swift-collections/Sources/ContainersPreview/Container.swift": {
+    "dependencies": "/Users/soc/Projects/temp/Virtual Monitor/.build/arm64-apple-macosx/debug/ContainersPreview.build/Container.d",
+    "object": "/Users/soc/Projects/temp/Virtual Monitor/.build/arm64-apple-macosx/debug/ContainersPreview.build/Container.swift.o",
+    "swiftmodule": "/Users/soc/Projects/temp/Virtual Monitor/.build/arm64-apple-macosx/debug/ContainersPreview.build/Container~partial.swiftmodule",
+    "swift-dependencies": "/Users/soc/Projects/temp/Virtual Monitor/.build/arm64-apple-macosx/debug/ContainersPreview.build/Container.swiftdeps",
+    "diagnostics": "/Users/soc/Projects/temp/Virtual Monitor/.build/arm64-apple-macosx/debug/ContainersPreview.build/Container.dia"
+  },
+  "/Users/soc/Projects/temp/Virtual Monitor/.build/checkouts/swift-collections/Sources/ContainersPreview/InputSpan.swift": {
+    "dependencies": "/Users/soc/Projects/temp/Virtual Monitor/.build/arm64-apple-macosx/debug/ContainersPreview.build/InputSpan.d",
+    "object": "/Users/soc/Projects/temp/Virtual Monitor/.build/arm64-apple-macosx/debug/ContainersPreview.build/InputSpan.swift.o",
+    "swiftmodule": "/Users/soc/Projects/temp/Virtual Monitor/.build/arm64-apple-macosx/debug/ContainersPreview.build/InputSpan~partial.swiftmodule",
+    "swift-dependencies": "/Users/soc/Projects/temp/Virtual Monitor/.build/arm64-apple-macosx/debug/ContainersPreview.build/InputSpan.swiftdeps",
+    "diagnostics": "/Users/soc/Projects/temp/Virtual Monitor/.build/arm64-apple-macosx/debug/ContainersPreview.build/InputSpan.dia"
+  },
+  "/Users/soc/Projects/temp/Virtual Monitor/.build/checkouts/swift-collections/Sources/ContainersPreview/Mut.swift": {
+    "dependencies": "/Users/soc/Projects/temp/Virtual Monitor/.build/arm64-apple-macosx/debug/ContainersPreview.build/Mut.d",
+    "object": "/Users/soc/Projects/temp/Virtual Monitor/.build/arm64-apple-macosx/debug/ContainersPreview.build/Mut.swift.o",
+    "swiftmodule": "/Users/soc/Projects/temp/Virtual Monitor/.build/arm64-apple-macosx/debug/ContainersPreview.build/Mut~partial.swiftmodule",
+    "swift-dependencies": "/Users/soc/Projects/temp/Virtual Monitor/.build/arm64-apple-macosx/debug/ContainersPreview.build/Mut.swiftdeps",
+    "diagnostics": "/Users/soc/Projects/temp/Virtual Monitor/.build/arm64-apple-macosx/debug/ContainersPreview.build/Mut.dia"
+  },
+  "/Users/soc/Projects/temp/Virtual Monitor/.build/checkouts/swift-collections/Sources/ContainersPreview/Ref.swift": {
+    "dependencies": "/Users/soc/Projects/temp/Virtual Monitor/.build/arm64-apple-macosx/debug/ContainersPreview.build/Ref.d",
+    "object": "/Users/soc/Projects/temp/Virtual Monitor/.build/arm64-apple-macosx/debug/ContainersPreview.build/Ref.swift.o",
+    "swiftmodule": "/Users/soc/Projects/temp/Virtual Monitor/.build/arm64-apple-macosx/debug/ContainersPreview.build/Ref~partial.swiftmodule",
+    "swift-dependencies": "/Users/soc/Projects/temp/Virtual Monitor/.build/arm64-apple-macosx/debug/ContainersPreview.build/Ref.swiftdeps",
+    "diagnostics": "/Users/soc/Projects/temp/Virtual Monitor/.build/arm64-apple-macosx/debug/ContainersPreview.build/Ref.dia"
+  },
+  "/Users/soc/Projects/temp/Virtual Monitor/.build/checkouts/swift-collections/Sources/ContainersPreview/Shared.swift": {
+    "dependencies": "/Users/soc/Projects/temp/Virtual Monitor/.build/arm64-apple-macosx/debug/ContainersPreview.build/Shared.d",
+    "object": "/Users/soc/Projects/temp/Virtual Monitor/.build/arm64-apple-macosx/debug/ContainersPreview.build/Shared.swift.o",
+    "swiftmodule": "/Users/soc/Projects/temp/Virtual Monitor/.build/arm64-apple-macosx/debug/ContainersPreview.build/Shared~partial.swiftmodule",
+    "swift-dependencies": "/Users/soc/Projects/temp/Virtual Monitor/.build/arm64-apple-macosx/debug/ContainersPreview.build/Shared.swiftdeps",
+    "diagnostics": "/Users/soc/Projects/temp/Virtual Monitor/.build/arm64-apple-macosx/debug/ContainersPreview.build/Shared.dia"
+  }
+}

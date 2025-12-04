@@ -1,0 +1,3 @@
+module NIOSSL {
+    header "/Users/soc/Projects/temp/Virtual Monitor/.build/arm64-apple-macosx/release/NIOSSL.build/include/NIOSSL-Swift.h"
+}

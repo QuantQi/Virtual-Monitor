@@ -1,0 +1,3 @@
+module SystemPackage {
+    header "/Users/soc/Projects/temp/Virtual Monitor/.build/arm64-apple-macosx/release/SystemPackage.build/include/SystemPackage-Swift.h"
+}

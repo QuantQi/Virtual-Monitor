@@ -1,0 +1,3 @@
+module CryptoExtras {
+    header "/Users/soc/Projects/temp/Virtual Monitor/.build/arm64-apple-macosx/release/CryptoExtras.build/include/CryptoExtras-Swift.h"
+}
