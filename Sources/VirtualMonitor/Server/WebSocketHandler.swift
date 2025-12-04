@@ -72,6 +72,11 @@ final class WebSocketHandler: ChannelInboundHandler {
         if let session = session {
             sessionManager.endSession(session)
             webRTCManager.disconnect()
+            
+            // Stop screen capture when client disconnects
+            Task {
+                await ScreenCaptureManager.shared.stopCapture()
+            }
         }
         session = nil
     }

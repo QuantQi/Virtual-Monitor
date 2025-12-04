@@ -51,18 +51,23 @@ final class InputInjector: @unchecked Sendable {
     
     /// Inject mouse move event
     func injectMouseMove(xNorm: Double, yNorm: Double) {
-        guard config.enableMouseInjection, shouldAllowEvent() else { return }
+        guard config.enableMouseInjection else { return }
         
-        // Convert normalized coordinates to 4K pixel coordinates
-        let x = CGFloat(xNorm) * CGFloat(config.streamWidth)
-        let y = CGFloat(yNorm) * CGFloat(config.streamHeight)
+        // Skip rate limiting check for mouse moves to reduce lag
+        // Instead, just ensure we're enabled
+        inputLock.lock()
+        guard isEnabled else {
+            inputLock.unlock()
+            return
+        }
+        inputLock.unlock()
+        
+        // Convert normalized coordinates directly to screen coordinates
+        let point = convertNormalizedToScreen(xNorm: xNorm, yNorm: yNorm)
         
         // Update current position
-        currentMouseX = x
-        currentMouseY = y
-        
-        // Create and post mouse move event
-        let point = convertToScreenCoordinates(x: x, y: y)
+        currentMouseX = point.x
+        currentMouseY = point.y
         
         guard let event = CGEvent(mouseEventSource: nil,
                                    mouseType: .mouseMoved,
@@ -79,10 +84,8 @@ final class InputInjector: @unchecked Sendable {
     func injectMouseButton(button: Int, down: Bool, xNorm: Double, yNorm: Double) {
         guard config.enableMouseInjection, shouldAllowEvent() else { return }
         
-        // Convert coordinates
-        let x = CGFloat(xNorm) * CGFloat(config.streamWidth)
-        let y = CGFloat(yNorm) * CGFloat(config.streamHeight)
-        let point = convertToScreenCoordinates(x: x, y: y)
+        // Convert normalized coordinates directly to screen coordinates
+        let point = convertNormalizedToScreen(xNorm: xNorm, yNorm: yNorm)
         
         // Determine event type and button
         let (eventType, mouseButton): (CGEventType, CGMouseButton)
@@ -179,13 +182,24 @@ final class InputInjector: @unchecked Sendable {
     
     // MARK: - Coordinate Conversion
     
-    /// Convert 4K coordinates to actual screen coordinates
+    /// Convert normalized coordinates (0-1) directly to actual screen coordinates
+    private func convertNormalizedToScreen(xNorm: Double, yNorm: Double) -> CGPoint {
+        // Get the main display bounds
+        let mainDisplay = CGMainDisplayID()
+        let displayBounds = CGDisplayBounds(mainDisplay)
+        
+        // Map normalized coordinates directly to screen coordinates
+        // This avoids any intermediate scaling issues
+        let screenX = displayBounds.origin.x + (CGFloat(xNorm) * displayBounds.width)
+        let screenY = displayBounds.origin.y + (CGFloat(yNorm) * displayBounds.height)
+        
+        return CGPoint(x: screenX, y: screenY)
+    }
+    
+    /// Convert 4K coordinates to actual screen coordinates (legacy, kept for compatibility)
     private func convertToScreenCoordinates(x: CGFloat, y: CGFloat) -> CGPoint {
         // Get the main display bounds
-        guard let mainDisplay = CGMainDisplayID() as CGDirectDisplayID? else {
-            return CGPoint(x: x, y: y)
-        }
-        
+        let mainDisplay = CGMainDisplayID()
         let displayBounds = CGDisplayBounds(mainDisplay)
         
         // Scale from 4K to actual display resolution
