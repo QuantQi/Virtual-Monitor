@@ -428,33 +428,38 @@ class VirtualMonitorClient {
         const video = this.elements.video;
         const rect = video.getBoundingClientRect();
         
+        // Use actual video dimensions if available, otherwise fall back to config
+        // This ensures accurate mapping based on the actual stream being displayed
+        const actualVideoWidth = video.videoWidth || this.config.width;
+        const actualVideoHeight = video.videoHeight || this.config.height;
+        
         // Calculate video dimensions within the element (accounting for object-fit: contain)
-        const videoAspect = this.config.width / this.config.height;
+        const videoAspect = actualVideoWidth / actualVideoHeight;
         const elementAspect = rect.width / rect.height;
         
-        let videoWidth, videoHeight, offsetX, offsetY;
+        let displayedWidth, displayedHeight, offsetX, offsetY;
         
         if (videoAspect > elementAspect) {
             // Video is wider - letterboxed top/bottom
-            videoWidth = rect.width;
-            videoHeight = rect.width / videoAspect;
+            displayedWidth = rect.width;
+            displayedHeight = rect.width / videoAspect;
             offsetX = 0;
-            offsetY = (rect.height - videoHeight) / 2;
+            offsetY = (rect.height - displayedHeight) / 2;
         } else {
             // Video is taller - pillarboxed left/right
-            videoHeight = rect.height;
-            videoWidth = rect.height * videoAspect;
-            offsetX = (rect.width - videoWidth) / 2;
+            displayedHeight = rect.height;
+            displayedWidth = rect.height * videoAspect;
+            offsetX = (rect.width - displayedWidth) / 2;
             offsetY = 0;
         }
         
-        // Calculate position relative to video content
+        // Calculate position relative to video content (within the displayed area)
         const x = event.clientX - rect.left - offsetX;
         const y = event.clientY - rect.top - offsetY;
         
-        // Normalize to 0-1 range, clamped
-        const xNorm = Math.max(0, Math.min(1, x / videoWidth));
-        const yNorm = Math.max(0, Math.min(1, y / videoHeight));
+        // Normalize to 0-1 range, clamped to ensure coordinates stay within bounds
+        const xNorm = Math.max(0, Math.min(1, x / displayedWidth));
+        const yNorm = Math.max(0, Math.min(1, y / displayedHeight));
         
         return { xNorm, yNorm };
     }
