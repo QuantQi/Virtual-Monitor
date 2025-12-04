@@ -42,8 +42,38 @@ final class WebRTCManager: NSObject, @unchecked Sendable {
     private var isConnected = false
     private var pendingCandidates: [RTCIceCandidate] = []
     
+    // Stats timer
+    private var statsTimer: Timer?
+    
     private override init() {
         super.init()
+    }
+    
+    /// Start collecting WebRTC stats
+    private func startStatsCollection() {
+        statsTimer?.invalidate()
+        statsTimer = Timer.scheduledTimer(withTimeInterval: 5.0, repeats: true) { [weak self] _ in
+            self?.logStats()
+        }
+    }
+    
+    /// Log WebRTC stats
+    private func logStats() {
+        guard let pc = peerConnection else { return }
+        
+        pc.statistics { report in
+            for (_, stats) in report.statistics {
+                if stats.type == "outbound-rtp" {
+                    if let kind = stats.values["kind"] as? String, kind == "video" {
+                        let bytesSent = stats.values["bytesSent"] as? UInt64 ?? 0
+                        let packetsSent = stats.values["packetsSent"] as? UInt64 ?? 0
+                        let framesSent = stats.values["framesSent"] as? UInt64 ?? 0
+                        let framesEncoded = stats.values["framesEncoded"] as? UInt64 ?? 0
+                        self.logger.info("WebRTC outbound stats: bytesSent=\(bytesSent), packetsSent=\(packetsSent), framesSent=\(framesSent), framesEncoded=\(framesEncoded)")
+                    }
+                }
+            }
+        }
     }
     
     /// Create a new peer connection and generate offer
@@ -97,6 +127,9 @@ final class WebRTCManager: NSObject, @unchecked Sendable {
                 return
             }
             
+            // Log the original SDP for debugging
+            self.logger.debug("Original SDP offer:\n\(sdp.sdp)")
+            
             // Modify SDP to prefer H.264
             let modifiedSDP = self.preferH264(sdp: sdp.sdp)
             let modifiedDescription = RTCSessionDescription(type: .offer, sdp: modifiedSDP)
@@ -108,6 +141,7 @@ final class WebRTCManager: NSObject, @unchecked Sendable {
                 }
                 
                 self.logger.info("Offer created successfully")
+                self.logger.debug("Final SDP offer:\n\(modifiedSDP)")
                 self.delegate?.webRTCManager(self, didGenerateOffer: modifiedSDP)
             }
         }
@@ -122,9 +156,17 @@ final class WebRTCManager: NSObject, @unchecked Sendable {
         
         logger.info("Setting up video track...")
         
-        // Create video source
-        videoSource = WebRTCManager.factory.videoSource()
-        logger.debug("Video source created")
+        // Create video source with screen capture flag
+        videoSource = WebRTCManager.factory.videoSource(forScreenCast: true)
+        
+        // Notify the video source about expected resolution and frame rate
+        videoSource?.adaptOutputFormat(
+            toWidth: Int32(config.streamWidth),
+            height: Int32(config.streamHeight),
+            fps: Int32(config.targetFPS)
+        )
+        
+        logger.debug("Video source created and configured for \(config.streamWidth)x\(config.streamHeight)@\(config.targetFPS)fps")
         
         // Create screen capturer that feeds frames to the video source
         screenCapturer = ScreenVideoCapturer(source: videoSource!)
@@ -136,12 +178,16 @@ final class WebRTCManager: NSObject, @unchecked Sendable {
         videoTrack?.isEnabled = true
         logger.debug("Video track created: \(videoTrack?.trackId ?? "nil")")
         
-        // Add track to peer connection
-        let streamId = "stream0"
-        pc.add(videoTrack!, streamIds: [streamId])
+        // Add track using transceiver with sendOnly direction
+        let transceiverInit = RTCRtpTransceiverInit()
+        transceiverInit.direction = .sendOnly
+        transceiverInit.streamIds = ["stream0"]
         
-        // Configure video parameters
-        if let sender = pc.senders.first(where: { $0.track?.kind == "video" }) {
+        let transceiver = pc.addTransceiver(with: videoTrack!, init: transceiverInit)
+        logger.debug("Video transceiver created with direction: sendOnly, mid: \(transceiver?.mid ?? "nil")")
+        
+        // Configure video parameters on the sender
+        if let sender = transceiver?.sender {
             let parameters = sender.parameters
             
             // Configure encoding parameters for H.264 at high bitrate
@@ -153,6 +199,7 @@ final class WebRTCManager: NSObject, @unchecked Sendable {
             }
             
             sender.parameters = parameters
+            logger.debug("Sender parameters configured: maxBitrate=\(config.webRTCMaxBitrateBps)")
         }
         
         logger.debug("Video track set up with screen capturer")
@@ -337,6 +384,14 @@ extension WebRTCManager: RTCPeerConnectionDelegate {
         logger.info("ICE connection state: \(stateString)")
         
         isConnected = (newState == .connected || newState == .completed)
+        
+        // Start stats collection when connected
+        if isConnected {
+            DispatchQueue.main.async {
+                self.startStatsCollection()
+            }
+        }
+        
         delegate?.webRTCManager(self, didChangeConnectionState: stateString)
     }
     

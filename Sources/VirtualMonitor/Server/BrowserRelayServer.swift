@@ -141,6 +141,12 @@ final class HTTPHandler: ChannelInboundHandler, RemovableChannelHandler {
         
         logger.debug("Request: \(head.method) \(uri)")
         
+        // Handle CORS preflight requests
+        if head.method == .OPTIONS {
+            serveCORSPreflight(context: context)
+            return
+        }
+        
         // Handle HTTP requests (WebSocket upgrade is handled by NIO automatically)
         switch (head.method, uri) {
         case (.GET, "/"):
@@ -163,6 +169,7 @@ final class HTTPHandler: ChannelInboundHandler, RemovableChannelHandler {
             serve401(context: context)
             
         default:
+            logger.warning("Unhandled request: \(head.method) \(uri)")
             serve404(context: context)
         }
     }
@@ -231,6 +238,19 @@ final class HTTPHandler: ChannelInboundHandler, RemovableChannelHandler {
         sendResponse(context: context, status: .internalServerError, contentType: "text/plain", body: Data("Internal Server Error".utf8))
     }
     
+    private func serveCORSPreflight(context: ChannelHandlerContext) {
+        var headers = HTTPHeaders()
+        headers.add(name: "Access-Control-Allow-Origin", value: "*")
+        headers.add(name: "Access-Control-Allow-Methods", value: "GET, POST, OPTIONS")
+        headers.add(name: "Access-Control-Allow-Headers", value: "Content-Type, Authorization")
+        headers.add(name: "Access-Control-Max-Age", value: "86400")
+        headers.add(name: "Content-Length", value: "0")
+        
+        let head = HTTPResponseHead(version: .http1_1, status: .noContent, headers: headers)
+        context.write(wrapOutboundOut(.head(head)), promise: nil)
+        context.writeAndFlush(wrapOutboundOut(.end(nil)), promise: nil)
+    }
+    
     private func sendResponse(context: ChannelHandlerContext, status: HTTPResponseStatus, contentType: String, body: Data) {
         var headers = HTTPHeaders()
         headers.add(name: "Content-Type", value: contentType)
@@ -249,7 +269,13 @@ final class HTTPHandler: ChannelInboundHandler, RemovableChannelHandler {
     }
     
     func errorCaught(context: ChannelHandlerContext, error: Error) {
-        logger.error("HTTP error: \(error)")
+        // Check for common errors and provide helpful messages
+        let errorString = String(describing: error)
+        if errorString.contains("invalidMethod") || errorString.contains("invalid http method") {
+            logger.warning("Invalid HTTP method - possible HTTPS request to HTTP server or malformed request")
+        } else {
+            logger.error("HTTP error: \(error)")
+        }
         context.close(promise: nil)
     }
 }

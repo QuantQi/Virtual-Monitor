@@ -151,7 +151,7 @@ class VirtualMonitorClient {
     handleMessage(message) {
         switch (message.type) {
             case 'server_ready':
-                this.handleServerReady(message.payload);
+                this.handleServerReady(message);
                 break;
                 
             case 'webrtc_offer':
@@ -167,7 +167,7 @@ class VirtualMonitorClient {
                 break;
                 
             case 'config':
-                this.handleConfig(message.payload);
+                this.handleConfig(message.payload || message);
                 break;
                 
             case 'error':
@@ -180,11 +180,14 @@ class VirtualMonitorClient {
     }
     
     handleServerReady(payload) {
-        console.log('Server ready:', payload);
+        console.log('Server ready, raw message:', payload);
         
-        if (payload?.config) {
-            this.config = { ...this.config, ...payload.config };
+        // Handle both direct config (from server) and nested payload.config
+        const config = payload?.config || payload;
+        if (config?.width && config?.height) {
+            this.config = { ...this.config, ...config };
             this.elements.resolution.textContent = `${this.config.width}x${this.config.height}`;
+            console.log('Config updated:', this.config);
         }
     }
     
@@ -242,15 +245,44 @@ class VirtualMonitorClient {
             
             // Handle incoming tracks
             this.pc.ontrack = (event) => {
-                console.log('Received track:', event.track.kind);
+                console.log('========== ONTRACK EVENT ==========');
+                console.log('Received track:', event.track.kind, 'readyState:', event.track.readyState);
+                console.log('Track ID:', event.track.id);
+                console.log('Track enabled:', event.track.enabled);
+                console.log('Streams:', event.streams);
+                console.log('Receiver:', event.receiver);
+                console.log('Transceiver:', event.transceiver);
+                console.log('Transceiver direction:', event.transceiver?.direction);
+                console.log('===================================');
+                
                 if (event.track.kind === 'video') {
                     console.log('Setting video srcObject, streams:', event.streams.length);
-                    this.remoteStream = event.streams[0];
-                    this.elements.video.srcObject = this.remoteStream;
+                    
+                    if (event.streams.length > 0) {
+                        this.remoteStream = event.streams[0];
+                        this.elements.video.srcObject = this.remoteStream;
+                        console.log('Video element srcObject set to stream with', this.remoteStream.getTracks().length, 'tracks');
+                    } else {
+                        // No stream, create one from the track
+                        console.log('No stream, creating MediaStream from track');
+                        this.remoteStream = new MediaStream([event.track]);
+                        this.elements.video.srcObject = this.remoteStream;
+                    }
+                    
+                    // Log video element state
+                    console.log('Video element state:', {
+                        readyState: this.elements.video.readyState,
+                        paused: this.elements.video.paused,
+                        muted: this.elements.video.muted,
+                        videoWidth: this.elements.video.videoWidth,
+                        videoHeight: this.elements.video.videoHeight,
+                        srcObject: this.elements.video.srcObject ? 'set' : 'null'
+                    });
                     
                     // Ensure video plays
                     this.elements.video.play().then(() => {
                         console.log('Video playback started');
+                        console.log('Video dimensions after play:', this.elements.video.videoWidth, 'x', this.elements.video.videoHeight);
                         this.hideConnectionOverlay();
                     }).catch(err => {
                         console.error('Video play failed:', err);
@@ -259,6 +291,17 @@ class VirtualMonitorClient {
                         this.elements.video.play();
                         this.hideConnectionOverlay();
                     });
+                    
+                    // Also listen for video element events
+                    this.elements.video.onloadedmetadata = () => {
+                        console.log('Video metadata loaded:', this.elements.video.videoWidth, 'x', this.elements.video.videoHeight);
+                    };
+                    this.elements.video.onloadeddata = () => {
+                        console.log('Video data loaded');
+                    };
+                    this.elements.video.onplaying = () => {
+                        console.log('Video is now playing');
+                    };
                     
                     // Track stats
                     event.track.onended = () => console.log('Video track ended');
@@ -564,16 +607,32 @@ class VirtualMonitorClient {
         
         try {
             const stats = await this.pc.getStats();
+            let foundVideoStats = false;
             
             stats.forEach(report => {
                 if (report.type === 'inbound-rtp' && report.kind === 'video') {
+                    foundVideoStats = true;
                     const framesReceived = report.framesReceived || 0;
+                    const framesDecoded = report.framesDecoded || 0;
+                    const bytesReceived = report.bytesReceived || 0;
                     const now = Date.now();
                     const elapsed = (now - this.stats.lastStatsTime) / 1000;
                     
                     if (elapsed > 0) {
                         this.stats.fps = Math.round((framesReceived - this.stats.framesReceived) / elapsed);
                         this.elements.fps.textContent = `${this.stats.fps} fps`;
+                    }
+                    
+                    // Log video stats for debugging
+                    if (framesReceived % 60 === 0 || framesReceived < 5) {
+                        console.log('Video stats:', {
+                            framesReceived,
+                            framesDecoded,
+                            bytesReceived,
+                            fps: this.stats.fps,
+                            frameWidth: report.frameWidth,
+                            frameHeight: report.frameHeight
+                        });
                     }
                     
                     this.stats.framesReceived = framesReceived;
@@ -592,8 +651,12 @@ class VirtualMonitorClient {
                     }
                 }
             });
+            
+            if (!foundVideoStats && this.isConnected) {
+                console.log('No inbound video RTP stats found - video may not be streaming');
+            }
         } catch (error) {
-            // Stats not available
+            console.error('Stats error:', error);
         }
     }
 }

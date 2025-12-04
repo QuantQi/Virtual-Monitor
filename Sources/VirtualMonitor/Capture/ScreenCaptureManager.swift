@@ -158,7 +158,11 @@ final class ScreenCaptureManager: NSObject, @unchecked Sendable {
         
         // Validate the frame
         guard let imageBuffer = sampleBuffer.imageBuffer else {
-            logger.warning("Frame has no image buffer")
+            // This is normal - ScreenCaptureKit sends status frames without image data
+            // when there's no screen content change. Only log occasionally.
+            if frameCount % 100 == 1 {
+                logger.debug("Skipping status frame (no image buffer) - this is normal")
+            }
             return
         }
         

@@ -4,7 +4,7 @@ import Logging
 // Configure logging
 LoggingSystem.bootstrap { label in
     var handler = StreamLogHandler.standardOutput(label: label)
-    handler.logLevel = .debug
+    handler.logLevel = .info
     return handler
 }
 

@@ -66,7 +66,9 @@ final class ScreenVideoCapturer: RTCVideoCapturer {
         
         // Send to WebRTC video source
         guard let videoDelegate = delegate else {
-            logger.warning("No delegate set for video capturer")
+            if frameCount % 60 == 0 {
+                logger.warning("No delegate set for video capturer")
+            }
             return
         }
         
