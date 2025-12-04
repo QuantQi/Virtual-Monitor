@@ -229,13 +229,26 @@ final class WebSocketHandler: ChannelInboundHandler {
         // Start screen capture and create WebRTC offer
         Task {
             do {
-                // First create the WebRTC offer (which sets up the video track and capturer)
+                // First, ensure any existing capture is stopped
+                logger.info("Stopping any existing capture...")
+                await ScreenCaptureManager.shared.stopCapture()
+                
+                // Small delay to ensure cleanup
+                try await Task.sleep(nanoseconds: 50_000_000) // 50ms
+                
+                // Create the WebRTC offer (which sets up the video track and capturer)
                 // This must be done first so that when capture starts, there's a destination for frames
                 logger.info("Creating WebRTC offer...")
                 webRTCManager.createOffer()
                 
-                // Wait a moment for the video track to be set up
-                try await Task.sleep(nanoseconds: 100_000_000) // 100ms
+                // Wait for the video track to be set up properly
+                try await Task.sleep(nanoseconds: 200_000_000) // 200ms
+                
+                // Verify WebRTC is ready for frames, wait more if needed
+                if !webRTCManager.isReadyForFrames {
+                    logger.warning("WebRTC not ready for frames, waiting more...")
+                    try await Task.sleep(nanoseconds: 300_000_000) // 300ms more
+                }
                 
                 // Now start screen capture
                 logger.info("Starting screen capture...")

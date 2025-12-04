@@ -284,13 +284,25 @@ class VirtualMonitorClient {
                         console.log('Video playback started');
                         console.log('Video dimensions after play:', this.elements.video.videoWidth, 'x', this.elements.video.videoHeight);
                         this.hideConnectionOverlay();
+                        this.onWindowResize();
                     }).catch(err => {
                         console.error('Video play failed:', err);
                         // Try again without requiring user interaction
                         this.elements.video.muted = true;
-                        this.elements.video.play();
-                        this.hideConnectionOverlay();
+                        this.elements.video.play().then(() => {
+                            this.hideConnectionOverlay();
+                            this.onWindowResize();
+                        });
                     });
+                    
+                    // Check if video is actually receiving frames after a delay
+                    setTimeout(() => {
+                        if (this.elements.video.videoWidth === 0 || this.elements.video.videoHeight === 0) {
+                            console.warn('Video dimensions still 0 after 2 seconds, may need reconnect');
+                        } else {
+                            console.log('Video streaming confirmed:', this.elements.video.videoWidth, 'x', this.elements.video.videoHeight);
+                        }
+                    }, 2000);
                     
                     // Also listen for video element events
                     this.elements.video.onloadedmetadata = () => {
@@ -420,8 +432,36 @@ class VirtualMonitorClient {
             document.body.classList.toggle('fullscreen', this.isFullscreen);
         });
         
+        // Handle window resize - recalculate display dimensions
+        window.addEventListener('resize', () => {
+            this.onWindowResize();
+        });
+        
+        // Also handle video element resize
+        this.elements.video.addEventListener('loadedmetadata', () => {
+            this.onWindowResize();
+        });
+        
         // Focus overlay on page load
         overlay.focus();
+    }
+    
+    onWindowResize() {
+        const video = this.elements.video;
+        const rect = video.getBoundingClientRect();
+        
+        // Update displayed dimensions for debugging
+        const actualVideoWidth = video.videoWidth || this.config.width;
+        const actualVideoHeight = video.videoHeight || this.config.height;
+        
+        console.log(`Window resized - Video element: ${rect.width.toFixed(0)}x${rect.height.toFixed(0)}, ` +
+                    `Video content: ${actualVideoWidth}x${actualVideoHeight}`);
+        
+        // The coordinate mapping is recalculated on each mouse event in getNormalizedCoordinates()
+        // so no need to store anything here, but we can update the resolution display
+        if (video.videoWidth && video.videoHeight) {
+            this.elements.resolution.textContent = `${video.videoWidth}x${video.videoHeight}`;
+        }
     }
     
     getNormalizedCoordinates(event) {
