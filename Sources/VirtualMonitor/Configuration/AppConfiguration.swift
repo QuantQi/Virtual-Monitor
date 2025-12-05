@@ -8,6 +8,12 @@ final class AppConfiguration {
     let serverPort: Int
     let authToken: String?
     
+    // TLS settings
+    let tlsEnabled: Bool
+    let tlsCertPath: String?
+    let tlsKeyPath: String?
+    let tlsPort: Int
+    
     // Stream settings - fixed 4K@60
     let streamWidth: Int = 3840
     let streamHeight: Int = 2160
@@ -33,12 +39,20 @@ final class AppConfiguration {
     let enableMouseInjection: Bool
     
     private init() {
+        let env = ProcessInfo.processInfo.environment
+        
         // Load from environment or use defaults
-        self.serverPort = Int(ProcessInfo.processInfo.environment["VM_PORT"] ?? "") ?? 8080
-        self.authToken = ProcessInfo.processInfo.environment["VM_AUTH_TOKEN"]
+        self.serverPort = Int(env["VM_PORT"] ?? "") ?? 8080
+        self.authToken = env["VM_AUTH_TOKEN"]
+        
+        // TLS configuration
+        self.tlsEnabled = (env["VM_TLS_ENABLED"] ?? "").lowercased() == "true"
+        self.tlsCertPath = env["VM_TLS_CERT_PATH"]
+        self.tlsKeyPath = env["VM_TLS_KEY_PATH"]
+        self.tlsPort = Int(env["VM_TLS_PORT"] ?? "") ?? self.serverPort
         
         // Encoder: 25 Mbps default for LAN, good quality at 4K60
-        self.encoderBitrateMbps = Int(ProcessInfo.processInfo.environment["VM_BITRATE_MBPS"] ?? "") ?? 25
+        self.encoderBitrateMbps = Int(env["VM_BITRATE_MBPS"] ?? "") ?? 25
         self.keyframeIntervalSeconds = 1.0  // Keyframe every second for low latency
         self.useHardwareEncoder = true
         

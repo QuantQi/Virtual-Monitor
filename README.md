@@ -78,6 +78,28 @@ Environment variables:
 | `VM_PORT` | 8080 | HTTP/WebSocket server port |
 | `VM_AUTH_TOKEN` | (none) | Optional authentication token |
 | `VM_BITRATE_MBPS` | 25 | H.264 encoder bitrate in Mbps |
+| `VM_TLS_ENABLED` | false | Enable HTTPS/WSS with TLS |
+| `VM_TLS_CERT_PATH` | (none) | Path to PEM certificate file |
+| `VM_TLS_KEY_PATH` | (none) | Path to PEM private key file |
+| `VM_TLS_PORT` | VM_PORT | HTTPS listening port (defaults to VM_PORT) |
+
+### TLS / HTTPS Setup
+
+To enable HTTPS with a self-signed certificate:
+
+```bash
+# Generate a self-signed certificate (valid for 365 days)
+openssl req -x509 -newkey rsa:4096 -keyout vm-key.pem -out vm-cert.pem -days 365 -nodes \
+  -subj "/CN=virtualmonitor.local"
+
+# Run with TLS enabled
+VM_TLS_ENABLED=true \
+VM_TLS_CERT_PATH=./vm-cert.pem \
+VM_TLS_KEY_PATH=./vm-key.pem \
+.build/release/VirtualMonitor
+```
+
+When TLS is enabled, access the client at `https://<mac-ip>:8080/`. Your browser will warn about the self-signed certificate—accept it to proceed.
 
 ## Architecture
 
@@ -153,7 +175,7 @@ This application is designed for **LAN use only**. Security measures include:
 - Optional token-based authentication
 - Single-client model (rejects additional connections)
 - Rate-limiting on input events
-- No TLS (acceptable for LAN; not for internet)
+- Optional TLS/HTTPS support with self-signed certificates
 
 **Do NOT expose this to the internet** without additional security measures.
 

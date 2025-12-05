@@ -2,6 +2,7 @@ import Foundation
 import NIO
 import NIOHTTP1
 import NIOWebSocket
+import NIOSSL
 import Logging
 
 /// Main server handling HTTP and WebSocket connections
@@ -10,6 +11,7 @@ final class BrowserRelayServer {
     private let group: MultiThreadedEventLoopGroup
     private let bootstrap: ServerBootstrap
     private var channel: Channel?
+    private let sslContext: NIOSSLContext?
     
     let host: String
     let port: Int
@@ -17,12 +19,13 @@ final class BrowserRelayServer {
     let webRTCManager: WebRTCManager
     let inputInjector: InputInjector
     
-    init(host: String, port: Int, sessionManager: SessionManager, webRTCManager: WebRTCManager, inputInjector: InputInjector) async throws {
+    init(host: String, port: Int, sessionManager: SessionManager, webRTCManager: WebRTCManager, inputInjector: InputInjector, sslContext: NIOSSLContext? = nil) async throws {
         self.host = host
         self.port = port
         self.sessionManager = sessionManager
         self.webRTCManager = webRTCManager
         self.inputInjector = inputInjector
+        self.sslContext = sslContext
         
         self.group = MultiThreadedEventLoopGroup(numberOfThreads: System.coreCount)
         
@@ -60,7 +63,7 @@ final class BrowserRelayServer {
         self.bootstrap = ServerBootstrap(group: group)
             .serverChannelOption(ChannelOptions.backlog, value: 256)
             .serverChannelOption(ChannelOptions.socketOption(.so_reuseaddr), value: 1)
-            .childChannelInitializer { channel in
+            .childChannelInitializer { [sslContext] channel in
                 let httpHandler = HTTPHandler(
                     sessionManager: sessionManager,
                     webRTCManager: webRTCManager,
@@ -75,11 +78,22 @@ final class BrowserRelayServer {
                     }
                 )
                 
-                return channel.pipeline.configureHTTPServerPipeline(
+                // Configure HTTP pipeline (with optional TLS)
+                let configureHTTP: EventLoopFuture<Void> = channel.pipeline.configureHTTPServerPipeline(
                     withServerUpgrade: config,
                     withErrorHandling: true
                 ).flatMap {
                     channel.pipeline.addHandler(httpHandler)
+                }
+                
+                // If TLS is enabled, add SSL handler first
+                if let sslContext = sslContext {
+                    let sslHandler = NIOSSLServerHandler(context: sslContext)
+                    return channel.pipeline.addHandler(sslHandler).flatMap {
+                        configureHTTP
+                    }
+                } else {
+                    return configureHTTP
                 }
             }
             .childChannelOption(ChannelOptions.socketOption(.so_reuseaddr), value: 1)

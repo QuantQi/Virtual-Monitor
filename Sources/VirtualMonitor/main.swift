@@ -1,5 +1,6 @@
 import Foundation
 import Logging
+import NIOSSL
 
 // Configure logging
 LoggingSystem.bootstrap { label in
@@ -17,7 +18,26 @@ struct VirtualMonitorApp {
         
         // Configuration
         let config = AppConfiguration.shared
-        logger.info("Server will listen on port \(config.serverPort)")
+        
+        // Build SSL context if TLS is enabled
+        let sslContext: NIOSSLContext?
+        if config.tlsEnabled {
+            do {
+                sslContext = try makeServerSSLContext(from: config)
+                logger.info("TLS enabled")
+            } catch {
+                logger.error("Failed to configure TLS: \(error)")
+                throw error
+            }
+        } else {
+            sslContext = nil
+        }
+        
+        // Determine listening port
+        let port = config.tlsEnabled ? config.tlsPort : config.serverPort
+        let scheme = config.tlsEnabled ? "https" : "http"
+        
+        logger.info("Server will listen on port \(port)")
         logger.info("Stream resolution: \(config.streamWidth)x\(config.streamHeight)@\(config.targetFPS)fps")
         
         // Check permissions
@@ -54,14 +74,15 @@ struct VirtualMonitorApp {
         // Start the server
         let server = try await BrowserRelayServer(
             host: "0.0.0.0",
-            port: config.serverPort,
+            port: port,
             sessionManager: sessionManager,
             webRTCManager: webRTCManager,
-            inputInjector: inputInjector
+            inputInjector: inputInjector,
+            sslContext: sslContext
         )
         
         logger.info("Server started successfully")
-        logger.info("Access the client at: http://\(getLocalIPAddress() ?? "localhost"):\(config.serverPort)/")
+        logger.info("Access the client at: \(scheme)://\(getLocalIPAddress() ?? "localhost"):\(port)/")
         
         // Keep the application running
         try await server.run()
