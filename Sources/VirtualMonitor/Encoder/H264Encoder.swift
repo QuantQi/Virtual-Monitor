@@ -133,7 +133,13 @@ final class H264Encoder: @unchecked Sendable {
     private func setProperty(_ session: VTCompressionSession, key: CFString, value: Any) throws {
         let status = VTSessionSetProperty(session, key: key, value: value as CFTypeRef)
         if status != noErr {
-            logger.warning("Failed to set property \(key): \(status)")
+            // -12900 is kVTPropertyNotSupportedErr - property not supported by this encoder
+            // This is expected for some properties on certain hardware, log at debug level
+            if status == -12900 {
+                logger.debug("Property \(key) not supported by this encoder (skipping)")
+            } else {
+                logger.warning("Failed to set property \(key): \(status)")
+            }
         }
     }
     

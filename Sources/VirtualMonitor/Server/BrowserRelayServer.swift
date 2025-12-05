@@ -101,8 +101,16 @@ final class BrowserRelayServer {
     }
     
     func run() async throws {
-        channel = try await bootstrap.bind(host: host, port: port).get()
-        logger.info("Server bound to \(host):\(port)")
+        do {
+            channel = try await bootstrap.bind(host: host, port: port).get()
+            logger.info("Server bound to \(host):\(port)")
+        } catch let error as IOError where error.errnoCode == EADDRINUSE {
+            logger.error("Port \(port) is already in use (errno: 48)")
+            logger.error("To fix this, either:")
+            logger.error("  1) Kill the process using the port: lsof -ti :\(port) | xargs kill -9")
+            logger.error("  2) Use a different port: VM_PORT=<port_number> ./VirtualMonitor")
+            throw error
+        }
         
         // Keep running until channel closes
         try await channel?.closeFuture.get()

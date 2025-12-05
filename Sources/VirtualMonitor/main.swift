@@ -81,10 +81,16 @@ struct VirtualMonitorApp {
             sslContext: sslContext
         )
         
-        logger.info("Server started successfully")
-        logger.info("Access the client at: \(scheme)://\(getLocalIPAddress() ?? "localhost"):\(port)/")
+        logger.info("Binding server to port \(port)...")
         
-        // Keep the application running
+        // Run the server (this will bind and block until shutdown)
+        // Success message is logged by BrowserRelayServer after successful bind
+        Task {
+            // Wait a moment for bind to complete, then show access URL
+            try? await Task.sleep(nanoseconds: 100_000_000) // 100ms
+            logger.info("Access the client at: \(scheme)://\(getLocalIPAddress() ?? "localhost"):\(port)/")
+        }
+        
         try await server.run()
     }
     
